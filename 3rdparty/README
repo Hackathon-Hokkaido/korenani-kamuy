@@ -1,9 +1,0 @@
-As you were.
-
-Please prepare your source codes and the LICENSE document here e.g.
-
-
-       ./3rdparty/
-       ./3rdparty/xyz/LICENSE
-       ./3rdparty/xyz/src
-       ./3rdparty/xyz/Makefile.in
