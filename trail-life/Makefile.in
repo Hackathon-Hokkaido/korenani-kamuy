@@ -1,0 +1,27 @@
+#
+# $FML$
+#
+
+all:
+	@ @ECHO@ "make install"
+	@ @ECHO@ "make clean		clean up *~ recursively et.al."
+
+install:
+	@SHELL@ install.sh
+
+clean:
+	@FIND@ . -name '*~' -type f -exec rm -v {} \;
+	@RM@ -f install.sh nsrg/setup.sh
+
+
+
+#
+# utlilities
+#
+show-status: 
+	@ @GIT@ status -s
+
+status: show-status
+
+update:
+	@ @GIT@ pull --rebase

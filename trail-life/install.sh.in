@@ -1,0 +1,23 @@
+#!@SHELL@
+
+prefix=@prefix@/trail-life
+install=@INSTALL@
+
+bindir=$prefix/bin
+sbindir=$prefix/bin
+libexecdir=$prefix/libexec
+libperldir=$prefix/lib/perl
+data_dir=$prefix/share/edict
+
+@TEST@ -d $prefix || @MKDIR@ -p $prefix
+$install -c nsrg/setup.sh $prefix
+
+@TEST@  -d $libperldir || @MKDIR@ -p $libperldir
+@RSYNC@ -av nsrg/lib/perl/ $libperldir/
+
+@TEST@  -d $data_dir || @MKDIR@ -p $data_dir
+@RSYNC@ -av edrg/cooked.edict2.imagenet $data_dir/
+
+exit 0
+
+

@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+#
+#
+
+# assert
+uid=`id -u`
+if [ "X$uid" != "X0" ];then echo "error: run this script as ROOT" ; exit 1; fi
+
+sys=`uname -s`
+if [ "X$sys" != "XLinux" ];then echo "error: runnable only on Linux now" ; exit 1; fi
+
+# 1. install keras after remove the default numpy on this system package.
+apt remove  numpy scipy
+apt install python-pip
+pip install keras tensorflow
+
+# 2. install Inception v3 and the utilities
+git clone https://github.com/tensorflow/tensorflow
+git clone https://github.com/tensorflow/models
+
+# initialize and test it.
+(
+    cd models/tutorials/image/imagenet/
+    python classify_image.py
+    mv -v /tmp/imagenet .
+    chown -R www-data:www-data imagenet/
+    chmod -R a-w imagenet/
+)
+
+exit 0
+
+#
+# HOW TO USE ...
+#
+
+# usage
+(
+    cd models/tutorials/image/imagenet/
+    python classify_image.py --image_file $target.jpg
+)
+
+# retrain
+(
+    cd tensorflow
+    python tensorflow/examples/image_retraining/retrain.py \
+	   --image_dir ~/flower_photos
+
+)

@@ -1,0 +1,83 @@
+dnl
+dnl $FML: configure.in,v 1.47 2008/09/09 11:23:34 fukachan Exp $
+dnl
+AC_REVISION($Revision: 1.2 $)
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(nsrg/setup.sh.in)
+
+# compile with optimisation and without debugging by default
+CFLAGS=${CFLAGS-"-O"}
+LDFLAGS=${LDFLAGS-""}
+
+dnl path_check
+dnl Checks for programs.
+
+dnl perl is mandatory
+AC_CHECK_PROGS(have_perl, perl)
+if test ! -n "$have_perl" ; then
+   AC_MSG_ERROR("Perl needs to be installed to use trail-life")
+fi
+AC_PATH_PROG(PERL,   perl)
+
+AC_CHECK_PROGS(have_python, python)
+if test ! -n "$have_python" ; then
+   AC_MSG_ERROR("Python needs to be installed use trail-life")
+fi
+AC_PATH_PROG(PYTHON, python)
+
+AC_CHECK_PROGS(have_git, git)
+if test ! -n "$have_git" ; then
+   AC_MSG_ERROR("Git needs to be installed to setup trail-life")
+fi
+AC_PATH_PROG(GIT,   git)
+
+
+AC_MSG_RESULT("checking whether optional useful commands are available or not")
+
+AC_PATH_PROG(CC,       cc)
+AC_PATH_PROG(INSTALL,  install)
+
+AC_PATH_PROG(TEST,     test)
+AC_PATH_PROG(MKDIR,    mkdir)
+AC_PATH_PROG(FIND,     find)
+AC_PATH_PROG(RM,       rm)
+AC_PATH_PROG(ECHO,     echo)
+
+AC_PATH_PROG(CKSUM,    cksum)
+AC_PATH_PROG(SUM,      sum)
+AC_PATH_PROG(MD5,      md5)
+AC_PATH_PROG(DIGEST,   digest)
+
+AC_PATH_PROG(RSYNC,    rsync)
+
+AC_PATH_PROG(LS,       ls)
+AC_PATH_PROG(TAR,      tar)
+AC_PATH_PROG(GZIP,     gzip)
+AC_PATH_PROG(ZCAT,     zcat)
+AC_PATH_PROG(GZCAT,    gzcat)
+AC_PATH_PROG(GUNZIP,   gunzip)
+AC_PATH_PROG(LHA,      lha)
+AC_PATH_PROG(ISH,      ish)
+AC_PATH_PROG(BZIP2,    bzip2)
+AC_PATH_PROG(BUNZIP2,  bunzip2)
+AC_PATH_PROG(UUENCODE, uuencode)
+AC_PATH_PROG(COMPRESS, compress)
+
+AC_PATH_PROG(SENDMAIL,   sendmail)
+AC_PATH_PROG(MAKEMAP,    makemap)
+AC_PATH_PROG(NEWALIASES, newaliases)
+AC_PATH_PROG(POSTFIX,    postfix)
+AC_PATH_PROG(POSTALIAS,  postalias)
+AC_PATH_PROG(POSTCONF,   postconf)
+AC_PATH_PROG(POSTMAP,    postmap)
+
+dnl path_check_end
+
+AC_SUBST(SHELL)
+
+AC_OUTPUT(\
+	Makefile      \
+	install.sh    \
+	nsrg/setup.sh \
+	)
